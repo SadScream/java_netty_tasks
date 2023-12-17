@@ -1,4 +1,4 @@
-package study.oop.netty.nettyfirsttask.client;
+package study.oop.netty.nettyfirsttask.client.game;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -12,7 +12,7 @@ import study.oop.netty.nettyfirsttask.client.data.decoders.ResponseDecoder;
 import study.oop.netty.nettyfirsttask.client.data.encoders.RequestEncoder;
 import study.oop.netty.nettyfirsttask.client.handlers.GameClientHandler;
 
-public class GameClient {
+public class Client {
     private EventLoopGroup serverGroup = null;
 
     public void connect(int port, String host) throws Exception {
@@ -50,7 +50,7 @@ public class GameClient {
         String host = "localhost";
         int port = 46000;
 
-        GameClient client = new GameClient();
+        Client client = new Client();
         client.connect(port, host);
     }
 }

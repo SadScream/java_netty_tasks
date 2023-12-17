@@ -42,7 +42,7 @@ public class ResponseDecoder extends ReplayingDecoder<Response> {
                     unit.setId(byteBuf.readInt());
                     int x = byteBuf.readInt();
                     int y = byteBuf.readInt();
-                    unit.setCoords(x, y);
+                    unit.setPosition(x, y);
 
                     units.add(unit);
                 }
@@ -56,7 +56,7 @@ public class ResponseDecoder extends ReplayingDecoder<Response> {
                 response.setId(byteBuf.readInt());
                 int x = byteBuf.readInt();
                 int y = byteBuf.readInt();
-                response.setCoords(x, y);
+                response.setPosition(x, y);
             }
         }
     }

@@ -10,6 +10,7 @@ import study.oop.netty.nettyfirsttask.shared.models.Unit;
 import study.oop.netty.nettyfirsttask.shared.requests.Request;
 import study.oop.netty.nettyfirsttask.shared.responses.Response;
 
+import java.awt.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
@@ -23,7 +24,6 @@ public class ResponseEncoder extends MessageToByteEncoder<Response> {
     }
 
     private void resolveResponseType(Response unitEntityResponse, ByteBuf byteBuf) {
-        System.out.println("[Encoding] " + unitEntityResponse.getResponseType());
         switch (unitEntityResponse.getResponseType()) {
             case ResponseType.InitialUnitArrayData -> {
                 byteBuf.writeInt(unitEntityResponse.getResponseType().length());
@@ -32,25 +32,22 @@ public class ResponseEncoder extends MessageToByteEncoder<Response> {
 
                 for (Unit unit: unitEntityResponse.getUnits()) {
                     byteBuf.writeInt(unit.getId());
-                    byteBuf.writeInt(unit.getCoords().getKey());
-                    byteBuf.writeInt(unit.getCoords().getValue());
+                    byteBuf.writeInt(unit.getPosition().x);
+                    byteBuf.writeInt(unit.getPosition().y);
                 }
-
-                break;
             }
             case ResponseType.UnitData -> {
                 byteBuf.writeInt(unitEntityResponse.getResponseType().length());
                 byteBuf.writeCharSequence(unitEntityResponse.getResponseType(), charset);
-                Pair<Integer, Integer> coords = unitEntityResponse.getCoords();
-                int x = coords.getKey();
-                int y = coords.getValue();
+                Point coords = unitEntityResponse.getPosition();
+
+                int x = coords.x;
+                int y = coords.y;
                 int id = unitEntityResponse.getId();
 
                 byteBuf.writeInt(id);
                 byteBuf.writeInt(x);
                 byteBuf.writeInt(y);
-
-                break;
             }
         }
     }

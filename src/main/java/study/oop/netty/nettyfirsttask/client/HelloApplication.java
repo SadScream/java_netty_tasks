@@ -8,20 +8,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
+import study.oop.netty.nettyfirsttask.client.game.Client;
 
 import java.io.IOException;
+import java.sql.Time;
 
 public class HelloApplication extends Application {
     @FXML
     private Canvas canvas;
 
-    private GameClient gameClient = null;
+    private Client gameClient = null;
     private String host = "localhost";
     private int port = 46000;
 
     @Override
     public void start(Stage stage) throws IOException {
-        gameClient = new GameClient();
+        gameClient = new Client();
 
         Task<Integer> task = new Task<Integer>() {
             @Override
@@ -42,9 +44,11 @@ public class HelloApplication extends Application {
         th.start();
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        AnimationTimer tm = new TimerMethod();
-        tm.start();
         Scene scene = new Scene(fxmlLoader.load(), 1180, 680);
+
+        AnimationTimer tm = new TimerMethod(fxmlLoader.getController());
+        tm.start();
+
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.setResizable(false);
@@ -60,13 +64,22 @@ public class HelloApplication extends Application {
         launch();
     }
 
-    private class TimerMethod extends AnimationTimer {
+    private static class TimerMethod extends AnimationTimer {
+        HelloController controller;
         private long lastNow = 0;
+
+        public TimerMethod(HelloController controller) {
+            super();
+            this.controller = controller;
+        }
 
         @Override
         public void handle(long l) {
             if (l - lastNow > 1000) {
-                HelloController.RedrawUnits.onNext(0);
+                if (controller != null) {
+                    controller.redraw();
+                }
+
                 lastNow = l;
             }
         }

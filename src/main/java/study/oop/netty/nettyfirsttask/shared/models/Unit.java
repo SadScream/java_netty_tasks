@@ -2,10 +2,11 @@ package study.oop.netty.nettyfirsttask.shared.models;
 
 import javafx.util.Pair;
 
+import java.awt.*;
+
 public class Unit {
-    private int id;
-    private int x;
-    private int y;
+    protected int id;
+    protected Point position;
 
     public Unit() {
 
@@ -13,8 +14,12 @@ public class Unit {
 
     public Unit(int id, int x, int y) {
         this.id = id;
-        this.x = x;
-        this.y = y;
+        this.position = new Point(x, y);
+    }
+
+    public Unit(int id, Point position) {
+        this.id = id;
+        this.position = position;
     }
 
     public int getId() {
@@ -25,26 +30,20 @@ public class Unit {
         this.id = id;
     }
 
-    public Pair<Integer, Integer> getCoords() {
-        return new Pair<Integer, Integer>(x, y);
-    }
-
-    public boolean compareCoords(Pair<Integer, Integer> coords) {
-        return coords.getKey() == x && coords.getValue() == y;
-    }
-
-    public void setCoords(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public void setCoords(Pair<Integer, Integer> newCoords) {
-        this.x = newCoords.getKey();
-        this.y = newCoords.getValue();
-    }
-
     @Override
     public String toString() {
-        return "{ id:" + id + ";" + " x:" + x + "; y:" + y + " }";
+        return "{ id:" + id + ";" + " x:" + position.x + "; y:" + position.y + " }";
+    }
+
+    public Point getPosition() {
+        return position;
+    }
+
+    public void setPosition(Point position) {
+        this.position = position;
+    }
+
+    public void setPosition(int x, int y) {
+        this.position = new Point(x, y);
     }
 }

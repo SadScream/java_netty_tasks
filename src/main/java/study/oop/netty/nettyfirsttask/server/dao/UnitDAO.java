@@ -28,6 +28,6 @@ public class UnitDAO {
     public void update(int id, Unit updatedPerson) {
         Unit unitToBeUpdated = show(id);
 
-        unitToBeUpdated.setCoords(updatedPerson.getCoords());
+        unitToBeUpdated.setPosition(updatedPerson.getPosition());
     }
 }

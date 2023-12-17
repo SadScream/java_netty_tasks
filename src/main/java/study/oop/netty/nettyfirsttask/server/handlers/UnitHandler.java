@@ -12,6 +12,7 @@ import study.oop.netty.nettyfirsttask.shared.models.Unit;
 import study.oop.netty.nettyfirsttask.shared.requests.Request;
 import study.oop.netty.nettyfirsttask.shared.responses.Response;
 
+import java.awt.*;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -34,12 +35,11 @@ public class UnitHandler extends ChannelInboundHandlerAdapter {
                 List<Unit> units = Server.db.index();
 
                 for (Unit unit: units) {
-                    unit.setCoords(getNewRandomCoordsForUnit());
+                    unit.setPosition(getNewRandomCoordsForUnit());
                 }
 
                 responseData.setResponseType(ResponseType.InitialUnitArrayData);
                 responseData.setUnits(units);
-                break;
             }
             case RequestType.UnitReachedPoint -> {
                 int id = request.getId();
@@ -47,7 +47,7 @@ public class UnitHandler extends ChannelInboundHandlerAdapter {
                 Unit unit = Server.db.show(id);
                 responseData.setResponseType(ResponseType.UnitData);
                 responseData.setId(unit.getId());
-                responseData.setCoords(getNewRandomCoordsForUnit());
+                responseData.setPosition(getNewRandomCoordsForUnit());
             }
         }
 
@@ -60,10 +60,10 @@ public class UnitHandler extends ChannelInboundHandlerAdapter {
         ctx.close();
     }
 
-    private Pair<Integer, Integer> getNewRandomCoordsForUnit() {
+    private Point getNewRandomCoordsForUnit() {
         int x = ThreadLocalRandom.current().nextInt(0, 400);
         int y = ThreadLocalRandom.current().nextInt(0, 350);
 
-        return new Pair<Integer, Integer>(x, y);
+        return new Point(x, y);
     }
 }

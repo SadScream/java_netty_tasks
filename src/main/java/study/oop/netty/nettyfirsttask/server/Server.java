@@ -49,7 +49,7 @@ public class Server {
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)
                     .childOption(ChannelOption.SO_KEEPALIVE, true);
-
+            System.out.println("[Server Started]");
             ChannelFuture f = b.bind(port).sync();
             f.channel().closeFuture().sync();
         } finally {
