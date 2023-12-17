@@ -15,7 +15,7 @@ import study.oop.netty.nettyfirsttask.server.handlers.UnitHandler;
 
 public class Server {
     public static UnitDAO db;
-    private int port;
+    private final int port;
 
     public Server(int port) {
         this.port = port;
@@ -37,7 +37,7 @@ public class Server {
                     .channel(NioServerSocketChannel.class)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel socketChannel) throws Exception {
+                        protected void initChannel(SocketChannel socketChannel) {
                             socketChannel
                                     .pipeline()
                                     .addLast(

@@ -1,7 +1,5 @@
 package study.oop.netty.nettyfirsttask.shared.models;
 
-import javafx.util.Pair;
-
 import java.awt.*;
 
 public class Unit {

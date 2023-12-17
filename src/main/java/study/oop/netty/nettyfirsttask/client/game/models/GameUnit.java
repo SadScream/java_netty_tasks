@@ -16,10 +16,6 @@ public class GameUnit extends Unit {
 
     public PublishSubject<Integer> PositionReach = PublishSubject.create();
 
-    public GameUnit() {
-        super();
-    }
-
     public GameUnit(int id, Point position) {
         super(id, position);
     }

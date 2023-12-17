@@ -3,29 +3,23 @@ package study.oop.netty.nettyfirsttask.client;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.concurrent.Task;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
 import study.oop.netty.nettyfirsttask.client.game.Client;
 
 import java.io.IOException;
-import java.sql.Time;
 
 public class HelloApplication extends Application {
-    @FXML
-    private Canvas canvas;
-
     private Client gameClient = null;
-    private String host = "localhost";
-    private int port = 46000;
+    private final String host = "localhost";
+    private final int port = 46000;
 
     @Override
     public void start(Stage stage) throws IOException {
         gameClient = new Client();
 
-        Task<Integer> task = new Task<Integer>() {
+        Task<Integer> task = new Task<>() {
             @Override
             protected Integer call() {
                 try {

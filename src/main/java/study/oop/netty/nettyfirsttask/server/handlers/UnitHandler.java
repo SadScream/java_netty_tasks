@@ -1,10 +1,7 @@
 package study.oop.netty.nettyfirsttask.server.handlers;
 
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import javafx.util.Pair;
 import study.oop.netty.nettyfirsttask.server.Server;
 import study.oop.netty.nettyfirsttask.shared.models.RequestType;
 import study.oop.netty.nettyfirsttask.shared.models.ResponseType;
@@ -18,13 +15,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class UnitHandler extends ChannelInboundHandlerAdapter {
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg)
-            throws Exception {
-
+    public void channelRead(ChannelHandlerContext ctx, Object msg) {
         Request requestData = (Request) msg;
         Response responseData = resolveRequest(requestData);
-
-        ChannelFuture future = ctx.writeAndFlush(responseData);
+        ctx.writeAndFlush(responseData);
     }
 
     private Response resolveRequest(Request request) {

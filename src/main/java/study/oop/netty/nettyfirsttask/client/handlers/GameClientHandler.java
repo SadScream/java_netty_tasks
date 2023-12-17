@@ -3,23 +3,19 @@ package study.oop.netty.nettyfirsttask.client.handlers;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import study.oop.netty.nettyfirsttask.client.game.Service;
-import study.oop.netty.nettyfirsttask.client.game.Store;
-import study.oop.netty.nettyfirsttask.client.game.models.GameUnit;
 import study.oop.netty.nettyfirsttask.shared.models.RequestType;
 import study.oop.netty.nettyfirsttask.shared.models.ResponseType;
 import study.oop.netty.nettyfirsttask.shared.models.Unit;
 import study.oop.netty.nettyfirsttask.shared.requests.Request;
 import study.oop.netty.nettyfirsttask.shared.responses.Response;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameClientHandler extends ChannelInboundHandlerAdapter {
     Service gameService;
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx)
-            throws Exception {
+    public void channelActive(ChannelHandlerContext ctx) {
         gameService = Service.getInstance();
         gameService.UnitReachedPosition.subscribe(
                 (unitId) -> requestNewPosition(ctx, unitId)
@@ -38,8 +34,7 @@ public class GameClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg)
-            throws Exception {
+    public void channelRead(ChannelHandlerContext ctx, Object msg) {
         Response response = (Response) msg;
         Service service = Service.getInstance();
 

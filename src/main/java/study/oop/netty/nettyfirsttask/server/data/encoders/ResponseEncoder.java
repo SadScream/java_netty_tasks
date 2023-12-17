@@ -3,11 +3,8 @@ package study.oop.netty.nettyfirsttask.server.data.encoders;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
-import javafx.util.Pair;
-import study.oop.netty.nettyfirsttask.shared.models.RequestType;
 import study.oop.netty.nettyfirsttask.shared.models.ResponseType;
 import study.oop.netty.nettyfirsttask.shared.models.Unit;
-import study.oop.netty.nettyfirsttask.shared.requests.Request;
 import study.oop.netty.nettyfirsttask.shared.responses.Response;
 
 import java.awt.*;
@@ -19,7 +16,7 @@ public class ResponseEncoder extends MessageToByteEncoder<Response> {
 
     @Override
     protected void encode(ChannelHandlerContext channelHandlerContext, Response unitEntityResponse,
-                          ByteBuf byteBuf) throws Exception {
+                          ByteBuf byteBuf) {
         resolveResponseType(unitEntityResponse, byteBuf);
     }
 
