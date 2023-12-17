@@ -10,7 +10,6 @@ public class Renderer {
 
     private Renderer(GraphicsContext context) {
         this.context = context;
-        this.gameService = Service.getInstance();
         this.gameStore = Store.getInstance();
     }
 
@@ -30,7 +29,6 @@ public class Renderer {
     }
 
     GraphicsContext context;
-    Service gameService;
     Store gameStore;
 
     public void render() {
