@@ -65,6 +65,7 @@ public class GameUnit extends Unit {
 
         if (futurePosition.equals(position)) {
             PositionReach.onNext(id);
+            futurePosition = null;
         } else {
 
             int deltaX = (position.x == futurePosition.x) ? 0 :
